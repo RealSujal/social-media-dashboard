@@ -11,16 +11,8 @@ const setLightMode = () => {
     localStorage.setItem('colorMode', 'light');
 };
 
-const setColorFromLocalStorage = () => {
-    return localStorage.getItem('colorMode');
-};
-
-const setColorModeFromPreferences = () => {
-    window.matchMedia('(preferes-color-scheme: dark)').matches ? 'dark' : 'light';
-};
-
-const loadAndUpdateColor = () => {
-    const color = setColorFromLocalStorage() || setColorModeFromPreferences()
+const loadColor = () => {
+    const color = localStorage.getItem('colorMode') || 'dark';
     color == 'dark' ? darkButton.click() : lightButton.click();
 };
 
@@ -31,10 +23,4 @@ radioButtons.forEach(button => {
     });
 });
 
-window.matchMedia('(preferes-color-scheme: dark)')
-    .addEventListener('change', (event) => {
-        event.matches ? darkButton.click() : lightButton.click();
-    })
-
-
-loadAndUpdateColor();
+loadColor();
